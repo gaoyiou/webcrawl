@@ -77,7 +77,7 @@ for i in range (1,2):
     except TimeoutException:
         print "Timed out waiting for page to load"
 #write to the output xlsx
-    driver.switch_to_frame(driver.find_element_by_name('landIFrame'))
+    #driver.switch_to_frame(driver.find_element_by_name('landIFrame'))
     
     test = driver.find_element_by_xpath ('//*[@id="c1fe70e39c01450dbb6c5029cf7d2ad7"]/table/tbody/tr[1]/td/table/tbody/tr/td[1]')
     print test.text
