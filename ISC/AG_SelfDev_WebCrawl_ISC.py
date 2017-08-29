@@ -51,10 +51,10 @@ ClientNumber.click()
 ClientNumber.send_keys('clientid')
 SignIn = driver.find_element_by_xpath ('//*[@id="c_btnSignIn"]')
 SignIn.click()
-Search = driver.find_element_by_xpath ('//*[@id="side_menu"]/div/div/div/div/ul/li[5]/a')
-Search.click()
+QuickSearch = driver.find_element_by_xpath ('//*[@id="side_menu"]/div/div/div/div/ul/li[4]/a')
+QuickSearch.click()
 driver.switch_to_frame(driver.find_element_by_name('landIFrame'))
-SearchBy = driver.find_element_by_xpath ('//*[@id="searchby"]')
+SearchBy = driver.find_element_by_xpath ('//*[@id="quicksearchby"]')
 SearchBy.click()
 SearchBy.send_keys('Parcel Number')
 
@@ -70,16 +70,23 @@ for i in range (1,2):
     ParcelNumber.click()
     ParcelNumber.clear()
     ParcelNumber.send_keys(LINC_input)
-    driver.find_element_by_xpath ('//*[@id="AsOfDateSearchOption"]').click()
-    driver.find_element_by_xpath ('//*[@id="main"]/table/tbody/tr[3]/td/table/tbody/tr/td[2]/a/span').click()
+    driver.find_element_by_xpath ('//*[@id="main"]/form/table[3]/tbody/tr[3]/td/table/tbody/tr/td[2]/a/span').click()
+
     try:
-        parcelpage = WebDriverWait(driver, 20).until(EC.presence_of_element_located((By.XPATH, '//*[@id="main"]/table[1]/tbody/tr[1]/td/table/tbody/tr/td[2]')))
+        parcelpage = WebDriverWait(driver, 30).until(EC.presence_of_element_located((By.ID, "main")))
+        print "page loaded"
     except TimeoutException:
         print "Timed out waiting for page to load"
 #write to the output xlsx
+    
     #driver.switch_to_frame(driver.find_element_by_name('landIFrame'))
     
-    test = driver.find_element_by_xpath ('//*[@id="c1fe70e39c01450dbb6c5029cf7d2ad7"]/table/tbody/tr[1]/td/table/tbody/tr/td[1]')
+    # NumberResults = driver.find_element_by_xpath ('//*[@id="main"]/table[5]/tbody/tr/td/table/tbody/tr/td[1]')
+    # if NumberResults.text = 1:
+
+
+    test = driver.find_element_by_xpath ('//*[@id="htmltable_footer_row"]')
+
     print test.text
     '''write_sheet.write(i,0,driver.find_element_by_xpath ('//*[@id="c1fe70e39c01450dbb6c5029cf7d2ad7"]/table/tbody/tr[1]/td/table/tbody/tr/td[1]').text)
     write_sheet.write(i,1,driver.find_element_by_xpath ('//*[@id="c1fe70e39c01450dbb6c5029cf7d2ad7"]/table/tbody/tr[1]/td/table/tbody/tr/td[2]').text)
